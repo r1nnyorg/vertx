@@ -1,1 +1,35 @@
-
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@main
+        - uses: actions/setup-java@main
+          with:
+              java-version: 16.x
+        - run: curl https://chaowenguoorg.github.io/version/version.jsh | jshell -
+        - uses: actions/setup-java@main
+          with:
+              java-version: ${{env.JAVA}}
+        - run: |
+              JAVA_HOME=/usr gradle copyDependencies
+              javac -p copyDependencies web/*.java web/web/*.java
+              rm web/*.java web/web/*.java
+              jlink -p copyDependencies:. --add-modules web --output jre
+              JAVA_HOME=/usr gradle -p chat copyDependencies
+              javac -cp chat/copyDependencies/*:chat chat/Server.java
+        - uses: docker/login-action@master
+          with:
+              username: chaowenguo
+              password: ${{secrets.DOCKER}}
+        - uses: docker/setup-buildx-action@master        
+        - uses: docker/build-push-action@master
+          with:
+              push: true            
+              tags: chaowenguo/vertx
+              context: .
+        - uses: docker/build-push-action@master
+          with:
+              push: true
+              context: chat
+              tags: chaowenguo/chat:vertx
