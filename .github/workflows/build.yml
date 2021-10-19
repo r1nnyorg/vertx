@@ -12,5 +12,6 @@ jobs:
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle copyDependencies
               javac -cp copyDependencies/*:. Server.java
+              ls -al
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
