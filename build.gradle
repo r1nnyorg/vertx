@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-webflux:latest.release'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:latest.release'
 }
 
 task copyDependencies(type: Copy) {
