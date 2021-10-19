@@ -6,11 +6,8 @@ jobs:
         - uses: actions/checkout@main
         - uses: actions/setup-java@main
           with:
-              java-version: 16.x
-        - run: curl https://chaowenguoorg.github.io/version/version.jsh | jshell -
-        - uses: actions/setup-java@main
-          with:
-              java-version: ${{env.JAVA}}
+              java-version: 17.x
+              distribution: zulu
         - run: |
               JAVA_HOME=/usr gradle copyDependencies
               javac -p copyDependencies web/*.java web/web/*.java
