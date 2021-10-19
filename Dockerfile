@@ -1,4 +1,4 @@
 FROM openjdk
-COPY Server.javac /usr/local/src/
+COPY Server.class /usr/local/src/
 WORKDIR /usr/local/src
-ENTRYPOINT ["java", "Server.javac"]
+ENTRYPOINT ["java", "Server.class"]
