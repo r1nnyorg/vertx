@@ -9,7 +9,7 @@ jobs:
               java-version: 17.x
               distribution: zulu
         - run: |
-              JAVA_HOME=/usr gradle copyDependencies
+              gradle copyDependencies
               javac -p copyDependencies web/*.java web/web/*.java
               rm web/*.java web/web/*.java
               jlink -p copyDependencies:. --add-modules web --output jre
