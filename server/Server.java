@@ -1,19 +1,18 @@
 package server;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-@SpringBootApplication
-public class Server {
-
-	@RequestMapping("/")
-	public String index(){
-		return "Hello Spring Boot";
-	}
-	public static void main(String[] args) {
-		SpringApplication.run(Server.class, args);
-	}
+@org.springframework.web.bind.annotation.RestController
+@org.springframework.boot.autoconfigure.SpringBootApplication
+public class Server
+{
+    @org.springframework.web.bind.annotation.RequestMapping("/")
+    public String index()
+    {
+        return "Hello Spring Boot";
+    }
+    public static void main(final String[] args)
+    {
+        org.springframework.boot.SpringApplication.run(Server.class, args);
+	app.setDefaultProperties(java.util.Collections.singletonMap("server.port", "80"));
+        app.run(args);
+    }
 }
