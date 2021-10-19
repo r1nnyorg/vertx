@@ -11,7 +11,7 @@ public class Server
     }
     public static void main(final String[] args)
     {
-        org.springframework.boot.SpringApplication.run(Server.class, args);
+	final var app = new org.springframework.boot.SpringApplication(Server.class);
 	app.setDefaultProperties(java.util.Collections.singletonMap("server.port", "80"));
         app.run(args);
     }
