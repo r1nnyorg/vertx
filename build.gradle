@@ -7,9 +7,7 @@ repositories {
 }
 
 dependencies {
-    compile 'io.vertx:vertx-web:latest.release'
-    compile 'io.vertx:vertx-pg-client:latest.release'
-    compile 'io.vertx:vertx-redis-client:latest.release'
+    compile 'org.springframework.boot:spring-boot-starter-webflux:latest.release'
 }
 
 task copyDependencies(type: Copy) {
