@@ -9,5 +9,8 @@ jobs:
               java-version: 17.x
               distribution: zulu
         - run: |
+              docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle copyDependencies
               javac -cp copyDependencies/*:. Server.java
+              docker build -t chaowenguo/spring .
+              docker push chaowenguo/spring
