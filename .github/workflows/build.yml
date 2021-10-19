@@ -10,8 +10,4 @@ jobs:
               distribution: zulu
         - run: |
               gradle copyDependencies
-              javac -p copyDependencies web/*.java web/web/*.java
-              rm web/*.java web/web/*.java
-              jlink -p copyDependencies:. --add-modules web --output jre
-              JAVA_HOME=/usr gradle -p chat copyDependencies
-              javac -cp chat/copyDependencies/*:chat chat/Server.java
+              javac -cp copyDependencies/*:. Server.java
