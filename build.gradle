@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux:latest.release'
+    implementation 'org.postgresql:r2dbc-postgresql:latest.release'
 }
 
 task copyDependencies(type: Copy) {
