@@ -7,7 +7,7 @@ public class Server
 	final var records = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(client.sql("select * from productItem").fetch().all().toStream().collect(java.util.stream.Collectors.toList()));
 	final var route = org.springframework.web.reactive.function.server.RouterFunctions.route(org.springframework.web.reactive.function.server.RequestPredicates.GET("/"), request ->
         {
-	    org.springframework.web.reactive.function.server.ServerResponse.ok().bodyValue(request.bodyToMono(String.class).block());
+	    return org.springframework.web.reactive.function.server.ServerResponse.ok().bodyValue(request.bodyToMono(String.class).block());
 	});
         final var httpHandler = org.springframework.web.reactive.function.server.RouterFunctions.toHttpHandler(route);
 	final var adapter = new org.springframework.http.server.reactive.ReactorHttpHandlerAdapter(httpHandler);
