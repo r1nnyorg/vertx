@@ -1,5 +1,5 @@
 FROM openjdk
 COPY copyDependencies /usr/local/src/
-COPY server/Server.class /usr/local/src/server/Server.class
+COPY Server.class /usr/local/src/Server.class
 WORKDIR /usr/local/src
-ENTRYPOINT ["java", "-cp", ".:*", "server/Server"]
+ENTRYPOINT ["java", "-cp", ".:*", "Server"]
