@@ -15,7 +15,7 @@ jobs:
         - run: |
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle copyDependencies
-              javac -cp copyDependencies/*:. Server.java
+              javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
