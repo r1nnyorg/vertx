@@ -14,7 +14,7 @@ jobs:
               distribution: zulu
         - run: |
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
-              gradle copyDependencies
+              gradle --warning-mode all copyDependencies
               javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
