@@ -1,6 +1,6 @@
 public class Server
 {
-    public static void main(final java.lang.String[] args)
+    public static void main(final java.lang.String[] args) throws java.lang.Exception
     {
         final var connectionFactory = new io.r2dbc.postgresql.PostgresqlConnectionFactory(io.r2dbc.postgresql.PostgresqlConnectionConfiguration.builder().host("postgrespostgres.postgres.database.azure.com").username("postgres").password("pos1gres+").database("default").enableSsl().build());
 	final var client = org.springframework.r2dbc.core.DatabaseClient.create(connectionFactory);
