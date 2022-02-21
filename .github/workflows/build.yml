@@ -18,6 +18,7 @@ jobs:
               javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
+              sudo apt install -y --no-install-recommends miredo
               sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:242:4986:face:face:100c:0001 'sudo docker network create backend;
               sudo docker run -d --name web --network backend chaowenguo/spring'
     clean:
