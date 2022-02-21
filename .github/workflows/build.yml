@@ -18,9 +18,7 @@ jobs:
               javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
-              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
-              chmod 400 key
-              ssh -o StrictHostKeyChecking=no -i key ubuntu@150.230.43.249 'sudo docker network create backend;
+              sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:242:4986:face:face:100c:0001 'sudo docker network create backend;
               sudo docker run -d --name web --network backend chaowenguo/spring'
     clean:
         runs-on: ubuntu-latest
