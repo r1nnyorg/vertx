@@ -19,11 +19,10 @@ jobs:
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
               sudo apt install -y --no-install-recommends miredo
-              sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:242:4986:face:face:100c:0001 'echo "nameserver 2a03:7900:2:0:31:3:104:161" > /etc/resolv.conf;
-              echo {\"ipv6\":true, \"fixed-cidr-v6\":\"fd00::/64\"} > /etc/docker/daemon.json;
-              ip6tables -t nat -I POSTROUTING -j MASQUERADE;
-              sudo docker network create backend;
-              sudo docker run -d --name web --network backend chaowenguo/spring'
+              sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:242:4986:face:face:100c:0001 'docker network create --ipv6 --subnet fd10::/64 backend;
+              docker run -d --name redis --network backend redis;
+              docker run -d --name web --network backend chaowenguo/spring;
+              docker run -d --name ingress --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
     clean:
         runs-on: ubuntu-latest
         if: github.event.schedule == '0 1 * * *'
