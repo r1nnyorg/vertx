@@ -1,6 +1,6 @@
 FROM openjdk:slim
 RUN ["apt", "update"]
-RUN ["apt", "install", "-slimy", "--no-install-recommends", "libnetty-tcnative-jni"]
+RUN ["apt", "install", "-y", "--no-install-recommends", "libnetty-tcnative-jni"]
 
 FROM scratch
 COPY copyDependencies Server.class /usr/local/src/
