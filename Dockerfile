@@ -1,4 +1,4 @@
-FROM openjdk
+FROM openjdk:slim
 COPY copyDependencies /usr/local/src/
 COPY Server.class /usr/local/src/Server.class
 WORKDIR /usr/local/src
