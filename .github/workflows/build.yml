@@ -15,9 +15,6 @@ jobs:
         - run: |
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle --warning-mode all copyDependencies
-              jar xf copyDependencies/netty-tcnative-*-linux-x86_64.jar META-INF/native
-              cp META-INF/native/* copyDependencies
-              rm -rf META-INF copyDependencies/netty-tcnative-*-linux-x86_64.jar
               javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
               docker build -t chaowenguo/spring .
               docker push chaowenguo/spring
