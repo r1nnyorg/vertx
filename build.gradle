@@ -1,22 +1,18 @@
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'com.google.gradle:osdetector-gradle-plugin:1.4.0'
-  }
+plugins {
+    id 'java'
 }
 
-// Use the osdetector-gradle-plugin
-apply plugin: "com.google.osdetector"
-
-def tcnative_classifier = osdetector.classifier;
-// Fedora variants use a different soname for OpenSSL than other linux distributions
-// (see http://netty.io/wiki/forked-tomcat-native.html).
-if (osdetector.os == "linux" && osdetector.release.isLike("fedora")) {
-  tcnative_classifier += "-fedora";
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    runtime 'io.netty:netty-tcnative:2.0.20.Final:' + tcnative_classifier
+    implementation 'io.netty:netty-tcnative:latest.release:linux-'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:latest.release'
+    implementation 'org.springframework.data:spring-data-r2dbc:latest.release'
+    implementation 'org.postgresql:r2dbc-postgresql:latest.release'
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.default into 'copyDependencies'
 }
