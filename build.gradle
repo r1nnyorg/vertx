@@ -7,10 +7,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.netty:netty-tcnative:latest.release'
     implementation 'org.springframework.boot:spring-boot-starter-webflux:latest.release'
     implementation 'org.springframework.data:spring-data-r2dbc:latest.release'
     implementation 'org.postgresql:r2dbc-postgresql:latest.release'
+    implementation 'io.netty:netty-tcnative:latest.release'
 }
 
 task copyDependencies(type: Copy) {
