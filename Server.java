@@ -11,11 +11,10 @@ public class Server
     {
         final java.util.Map<String, Object> a = objectMapper.readValue(body, java.util.Map.class);
 	return a.entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue().toString())).collect(java.util.stream.Collectors.joining(" "));
-        //return org.springframework.web.reactive.function.server.ServerResponse.ok().body(request.bodyToFlux(java.lang.String.class).flatMap(body -> client.sql(objectMapper.readValue(body, new com.fasterxml.jackson.core.type.TypeReference<java.util.Map<java.lang.String, java.lang.String>>(){}).entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue())).collect(java.util.stream.Collectors.joining(" "))).fetch().all()), java.util.Map.class);
     }
     catch (final java.lang.Exception e)
     {
-	return null;
+	return "";
     }
 }).fetch().all()), java.util.Map.class));
         final var httpHandler = org.springframework.web.reactive.function.server.RouterFunctions.toHttpHandler(route);
