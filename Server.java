@@ -9,7 +9,7 @@ public class Server
 {
     try
     {
-	return objectMapper.readValue(body, java.util.Map.class);
+	return objectMapper.readValue(body, java.util.Map.class).entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue())).collect(java.util.stream.Collectors.toList());
         //return objectMapper.readValue(body, new com.fasterxml.jackson.core.type.TypeReference<java.util.Map<java.lang.String, java.lang.String>>(){}).get("limit");
         //return org.springframework.web.reactive.function.server.ServerResponse.ok().body(request.bodyToFlux(java.lang.String.class).flatMap(body -> client.sql(objectMapper.readValue(body, new com.fasterxml.jackson.core.type.TypeReference<java.util.Map<java.lang.String, java.lang.String>>(){}).entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue())).collect(java.util.stream.Collectors.joining(" "))).fetch().all()), java.util.Map.class);
     }
@@ -17,7 +17,7 @@ public class Server
     {
 	return null;
     }
-}), java.util.Map.class));
+}), java.util.List.class));
         final var httpHandler = org.springframework.web.reactive.function.server.RouterFunctions.toHttpHandler(route);
 	final var adapter = new org.springframework.http.server.reactive.ReactorHttpHandlerAdapter(httpHandler);
         final var server = reactor.netty.http.server.HttpServer.create().port(80).handle(adapter).bindNow();
