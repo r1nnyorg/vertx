@@ -10,7 +10,7 @@ public class Server
     try
     {
         final java.util.Map<String, Object> a = objectMapper.readValue(body, java.util.Map.class);
-	return client.sql(a.entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue().toString())).collect(java.util.stream.Collectors.joining(" "))).fetch().all();
+	return client.sql("select * from" + a.entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue().toString())).collect(java.util.stream.Collectors.joining(" "))).fetch().all();
     }
     catch (final java.lang.Exception e)
     {
