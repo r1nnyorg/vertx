@@ -20,7 +20,8 @@ jobs:
               docker push chaowenguo/spring
               sudo apt install -y --no-install-recommends miredo
               sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:242:4986:face:face:100c:0001 'docker network create --ipv6 --subnet fd10::/64 backend;
-              docker run -d --name web --network backend -p 80:80 chaowenguo/spring'
+              docker run -d --name web --network backend -p 80:80 chaowenguo/spring;
+              docker run -d --name ingress --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
     clean:
         runs-on: ubuntu-latest
         if: github.event.schedule == '0 1 * * *'
