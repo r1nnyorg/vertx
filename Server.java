@@ -9,7 +9,8 @@ public class Server
 {
     try
     {
-	java.lang.System.out.println(objectMapper.readValue(body, java.util.Map.class).entrySet().stream().map(entry -> entry.getKey()).collect(java.util.stream.Collectors.toList()));
+        final java.util.Map<String, Object> a = objectMapper.readValue(body, java.util.Map.class);
+	java.lang.System.out.println(a.entrySet().stream().map(entry -> entry.getKey()).collect(java.util.stream.Collectors.toList()));
 	return body;
 	//return objectMapper.readValue(body, new com.fasterxml.jackson.core.type.TypeReference<java.util.HashMap<java.lang.String, java.lang.Object>>(){}).entrySet().stream().map(entry -> java.lang.String.join(" ", entry.getKey(), entry.getValue().toString())).collect(java.util.stream.Collectors.toList());
         //return objectMapper.readValue(body, new com.fasterxml.jackson.core.type.TypeReference<java.util.Map<java.lang.String, java.lang.String>>(){}).get("limit");
