@@ -19,7 +19,7 @@ public class Server
 }), java.util.Map.class)).build();
         final var httpHandler = org.springframework.web.reactive.function.server.RouterFunctions.toHttpHandler(route);
 	final var adapter = new org.springframework.http.server.reactive.ReactorHttpHandlerAdapter(httpHandler);*/
-        final var server = reactor.netty.http.server.HttpServer.create().port(80).route(routes -> routes.post("/ajax", (request, response) -> response.sendString( reactor.core.publisher.Flux.just(java.util.Map.of("0", 0, "1", 1), java.util.Map.of("2", 2, "3", 3)).map($ -> objectMapper.writeValueAsString($) ) ))).bindNow();
+        final var server = reactor.netty.http.server.HttpServer.create().port(80).route(routes -> routes.post("/ajax", (request, response) -> response.sendString( reactor.core.publisher.Flux.just(java.util.Map.of("0", 0, "1", 1), java.util.Map.of("2", 2, "3", 3)).map( objectMapper::writeValueAsString ) ))).bindNow();
 	server.onDispose().block();
     }
 }
