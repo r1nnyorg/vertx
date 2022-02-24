@@ -1,8 +1,8 @@
 public class Server
 {
     public static void main(final java.lang.String[] args)
-    /*{
-        final var connectionFactory = new io.r2dbc.postgresql.PostgresqlConnectionFactory(io.r2dbc.postgresql.PostgresqlConnectionConfiguration.builder().host("postgrespostgres.postgres.database.azure.com").username("postgres").password("pos1gres+").database("default").enableSsl().build());
+    {
+        /*final var connectionFactory = new io.r2dbc.postgresql.PostgresqlConnectionFactory(io.r2dbc.postgresql.PostgresqlConnectionConfiguration.builder().host("postgrespostgres.postgres.database.azure.com").username("postgres").password("pos1gres+").database("default").enableSsl().build());
 	final var client = org.springframework.r2dbc.core.DatabaseClient.create(connectionFactory);
 	final var objectMapper = new com.fasterxml.jackson.databind.ObjectMapper();
 	final var route = org.springframework.web.reactive.function.server.RouterFunctions.route().POST("/ajax", request -> org.springframework.web.reactive.function.server.ServerResponse.ok().body(request.bodyToFlux(java.lang.String.class).flatMap(body ->
