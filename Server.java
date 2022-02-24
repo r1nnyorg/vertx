@@ -5,7 +5,7 @@ public class Server
         final var connectionFactory = new io.r2dbc.postgresql.PostgresqlConnectionFactory(io.r2dbc.postgresql.PostgresqlConnectionConfiguration.builder().host("postgrespostgres.postgres.database.azure.com").username("postgres").password("pos1gres+").database("default").enableSsl().build());
 	final var client = org.springframework.r2dbc.core.DatabaseClient.create(connectionFactory);
 	final var objectMapper = new com.fasterxml.jackson.databind.ObjectMapper();
-	final var route = org.springframework.web.reactive.function.server.RouterFunctions.route(org.springframework.web.reactive.function.server.RequestPredicates.POST("/ajax"), request -> org.springframework.web.reactive.function.server.ServerResponse.ok().body(request.bodyToFlux(java.lang.String.class).flatMap(body ->
+	final var route = org.springframework.web.reactive.function.server.RouterFunctions.route().POST("/ajax", request -> org.springframework.web.reactive.function.server.ServerResponse.ok().body(request.bodyToFlux(java.lang.String.class).flatMap(body ->
 {
     try
     {
@@ -16,7 +16,7 @@ public class Server
     {
 	return reactor.core.publisher.Flux.empty();
     }
-}), java.util.Map.class));
+}), java.util.Map.class)).build();
         final var httpHandler = org.springframework.web.reactive.function.server.RouterFunctions.toHttpHandler(route);
 	final var adapter = new org.springframework.http.server.reactive.ReactorHttpHandlerAdapter(httpHandler);
         final var server = reactor.netty.http.server.HttpServer.create().port(80).handle(adapter).bindNow();
