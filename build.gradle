@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.vertx:vertx-core:latest.release'
+    compile 'io.vertx:vertx-core:latest.release'
 }
 
 task copyDependencies(type: Copy) {
