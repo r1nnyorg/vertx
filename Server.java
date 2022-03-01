@@ -2,6 +2,7 @@ public class Server
 {
     public static void main(final java.lang.String[] args) throws Exception
     {
+        System.setProperty("java.net.preferIPv6Addresses", "true");
         final var address = java.net.InetAddress.getByName("postgrespostgres.postgres.database.azure.com"); 
         System.out.println(address.getHostAddress()); 
         final var vertx = io.vertx.core.Vertx.vertx();
