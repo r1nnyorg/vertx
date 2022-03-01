@@ -1,5 +1,5 @@
 FROM scratch
-COPY copyDependencies Server.class /usr/local/src/
+COPY copyDependencies Server.class DigiCertGlobalRootCA.crt.pem /usr/local/src/
 WORKDIR /usr/local/src
 ENV JAVA_HOME /usr/local/openjdk
 COPY --from=openjdk:slim /usr/local/openjdk* /usr/local/openjdk/
