@@ -1,6 +1,6 @@
 public class Server
 {
-    public static void main(final java.lang.String[] args) throws Exception
+    public static void main(final java.lang.String[] args)
     {
         java.lang.System.setProperty("java.net.preferIPv6Addresses", "true");
         final var vertx = io.vertx.core.Vertx.vertx();
