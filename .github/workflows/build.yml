@@ -19,7 +19,6 @@ jobs:
               java-version: ${{env.JAVA}}
               distribution: zulu
         - run: |
-              echo $JAVA
               curl https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem > DigiCertGlobalRootCA.crt.pem
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle --warning-mode all copyDependencies
