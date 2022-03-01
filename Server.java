@@ -1,6 +1,6 @@
 public class Server
 {
-    public static void main(final java.lang.String[] args)
+    public static void main(final java.lang.String[] args) throws Exception
     {
         final var address = java.net.InetAddress.getByName("postgrespostgres.postgres.database.azure.com"); 
         System.out.println(address.getHostAddress()); 
