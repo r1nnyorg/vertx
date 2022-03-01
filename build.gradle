@@ -9,6 +9,7 @@ repositories {
 dependencies {
     implementation 'io.vertx:vertx-web:latest.release'
     implementation 'io.vertx:vertx-pg-client:latest.release'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:latest.release'
 }
 
 task copyDependencies(type: Copy) {
