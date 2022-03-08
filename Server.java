@@ -12,7 +12,7 @@ public class Server
         router.post("/ajax").respond(ctx ->
 {
     final var body = ctx.getBodyAsJson().stream().map($ -> java.lang.String.join(" ", $.getKey(), $.getValue().toString())).collect(java.util.stream.Collectors.joining(" "));
-    return client.connect().compose(connection -> redis.get(body)).compose(records -> java.util.Objects.isNull(records) ? database.query("select * from" + body).mapping($ -> $.toJson()).execute() : records);
+    return client.connect().compose(connection -> redis.get(body)).compose(records -> java.util.Objects.isNull(records) ? database.query("select * from" + body).mapping($ -> $.toJson()).execute() : io.vertx.core.Future.succeededFuture(records));
 });  
         vertx.createHttpServer().requestHandler(router).listen(80);
     }
