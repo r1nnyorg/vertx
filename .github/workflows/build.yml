@@ -40,7 +40,7 @@ jobs:
               #docker run -d --name ingress --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
               chmod 400 key
-              ssh -o StrictHostKeyChecking=no ubuntu@155.248.198.227 'sudo docker stop `docker container ls -q`;
+              ssh -o StrictHostKeyChecking=no -i key ubuntu@155.248.198.227 'sudo docker stop `docker container ls -q`;
               sudo docker system prune -af;
               sudo docker network create backend;
               sudo docker run -d --name redis --network backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes;
