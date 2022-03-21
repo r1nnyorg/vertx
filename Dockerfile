@@ -2,7 +2,7 @@ FROM scratch
 COPY copyDependencies Server.class DigiCertGlobalRootCA.crt.pem /usr/local/src/
 WORKDIR /usr/local/src
 ENV JAVA_HOME /usr/local/openjdk
-ARG password HL798820y+
+ENV password HL798820y+
 COPY --from=openjdk:slim /bin/bash /usr/bin/
 COPY --from=openjdk:slim /usr/local/openjdk* /usr/local/openjdk/
 COPY --from=openjdk:slim /lib/x86_64-linux-gnu /lib/x86_64-linux-gnu/
