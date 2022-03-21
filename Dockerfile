@@ -1,5 +1,5 @@
 FROM scratch
-ARG password=HL798820y+
+ARG password HL798820y+
 COPY copyDependencies Server.class DigiCertGlobalRootCA.crt.pem /usr/local/src/
 WORKDIR /usr/local/src
 ENV JAVA_HOME /usr/local/openjdk
