@@ -30,7 +30,7 @@ jobs:
               #sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:211:25cf::2196:1 'docker stop `docker container ls -q`;
               #docker system prune -af;
               #docker network create --ipv6 --subnet fd10::/64 backend;
-              #docker run -d --name redis --net backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes;
+              #docker run -d --name redis --net backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes --masterauth ${{secrets.PASSWORD}} --requirepass ${{secrets.PASSWORD}};
               #docker run -d --name web --net backend chaowenguo/vertx;
               #docker run -d --name ingress --net backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
@@ -38,7 +38,7 @@ jobs:
               ssh -o StrictHostKeyChecking=no -i key ubuntu@155.248.198.227 'sudo docker stop `sudo docker container ls -q`;
               sudo docker system prune -af;
               sudo docker network create backend;
-              sudo docker run -d --name redis --net backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes;
+              sudo docker run -d --name redis --net backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes --masterauth ${{secrets.PASSWORD}} --requirepass ${{secrets.PASSWORD}};
               sudo docker run -d --name web --net backend chaowenguo/vertx;
               sudo docker run -d --name ingress --net backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
     clean:
