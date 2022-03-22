@@ -1,5 +1,5 @@
 FROM scratch
-COPY copyDependencies Server.class DigiCertGlobalRootCA.crt.pem /usr/local/src/
+COPY copyDependencies Server.class DigiCertGlobalRootCA.crt.pem ca.crt client.root.crt client.root.key /usr/local/src/
 WORKDIR /usr/local/src
 ENV JAVA_HOME=/usr/local/openjdk password=''
 COPY --from=openjdk:slim /usr/local/openjdk* /usr/local/openjdk/
