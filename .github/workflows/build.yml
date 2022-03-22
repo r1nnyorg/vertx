@@ -21,6 +21,9 @@ jobs:
               distribution: zulu
         - run: |
               curl https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem > DigiCertGlobalRootCA.crt.pem
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/ca.crt > ca.crt
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/client.root.crt > client.root.crt
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/client.root.key > client.root.key
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle --warning-mode all copyDependencies
               javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
