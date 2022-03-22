@@ -9,7 +9,7 @@ public class Server
         final var client = io.vertx.redis.client.Redis.createClient(vertx, new io.vertx.redis.client.RedisOptions().setType(io.vertx.redis.client.RedisClientType.CLUSTER).addConnectionString("redis://redis").setPassword(java.lang.System.getenv("password"))); //final var client = io.vertx.redis.client.Redis.createClient(vertx, "redis://redis");
         final var redis = io.vertx.redis.client.RedisAPI.api(client);
         //final var database = io.vertx.pgclient.PgPool.pool(vertx, new io.vertx.pgclient.PgConnectOptions().setHost("postgrespostgres.postgres.database.azure.com").setDatabase("default").setUser("postgres").setPassword("pos1gres+").setSsl(true).setPemTrustOptions(new io.vertx.core.net.PemTrustOptions().addCertPath("DigiCertGlobalRootCA.crt.pem")), new io.vertx.sqlclient.PoolOptions());
-        final var database = io.vertx.pgclient.PgPool.pool(vertx, new io.vertx.pgclient.PgConnectOptions().setHost("cockroach").setDatabase("defaultdb").setUser("root").setSsl(true).setPort(26257), new io.vertx.sqlclient.PoolOptions());
+        final var database = io.vertx.pgclient.PgPool.pool(vertx, new io.vertx.pgclient.PgConnectOptions().setHost("cockroach").setDatabase("defaultdb").setUser("root").setSslMode(io.vertx.pgclient.SslMode.VERIFY_FULL).setPort(26257), new io.vertx.sqlclient.PoolOptions());
         router.post("/ajax").respond(ctx ->
 {
     final var body = ctx.getBodyAsJson().stream().map($ -> java.lang.String.join(" ", $.getKey(), $.getValue().toString())).collect(java.util.stream.Collectors.joining(" "));
