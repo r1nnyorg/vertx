@@ -20,11 +20,12 @@ jobs:
               java-version: ${{env.JAVA}}
               distribution: zulu
         - run: |
-              git clone https://github.com/chaowenGUO/key
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
+              git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' clone git@github.com:chaowenGUO/key keykey
+              cp -r keykey/certs/* .
+              rm -rf keykey
+              ls -al .
               curl https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem > DigiCertGlobalRootCA.crt.pem
-              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/ca.crt > ca.crt
-              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/client.root.crt > client.root.crt
-              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/client.root.key > client.root.key
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle --warning-mode all copyDependencies
               javac -Xlint:deprecation -cp copyDependencies/*:. Server.java
@@ -32,7 +33,6 @@ jobs:
               docker push chaowenguo/vertx
               #sudo apt install -y --no-install-recommends miredo
               #sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@2a01:4f8:211:25cf::2196:1 'docker network create --ipv6 --subnet fd10::/64 backend'
-              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
               chmod 400 key
               ssh -o StrictHostKeyChecking=no -i key ubuntu@152.67.226.235 'sudo docker stop `sudo docker container ls -q`;
               sudo docker system prune -af;
