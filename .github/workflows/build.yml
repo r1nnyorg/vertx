@@ -7,14 +7,14 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        #if: github.event_name == 'repository_dispatch'
+        if: github.event_name == 'repository_dispatch'
         steps:
         - uses: actions/checkout@main
         - uses: actions/setup-java@main
           with:
               java-version: 17.x
               distribution: zulu
-        - run: curl https://chaowenguoorg.github.io/common/version.jsh | jshell -
+        - run: curl https://${GITHUB_REPOSITORY%/*}.github.io/common/version.jsh | jshell -
         - uses: actions/setup-java@main
           with:
               java-version: ${{env.JAVA}}
