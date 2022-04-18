@@ -25,7 +25,6 @@ jobs:
               git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' clone git@github.com:chaowenGUO/key keykey
               cp -r keykey/certs/* .
               rm -rf keykey
-              ls -al .
               curl https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem > DigiCertGlobalRootCA.crt.pem
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               gradle --warning-mode all copyDependencies
