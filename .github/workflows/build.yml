@@ -14,7 +14,7 @@ jobs:
           with:
               java-version: 17.x
               distribution: zulu
-        - run: curl https://${GITHUB_REPOSITORY%/*}.github.io/common/version.jsh | jshell -
+        - run: curl https://chaowenguoorg.github.io/common/version.jsh | jshell -
         - uses: actions/setup-java@main
           with:
               java-version: ${{env.JAVA}}
