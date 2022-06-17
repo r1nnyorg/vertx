@@ -5,6 +5,16 @@ on:
     - cron: '0 1 * * *'
     
 jobs:
+    backup:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        steps:
+        - uses: actions/checkout@main
+        - run: |
+              git fetch --unshallow
+              echo '${{secrets.KEY}}' > key
+              chmod 400 key
+              git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' push -f git@bitbucket.org:chaowenguo/${GITHUB_REPOSITORY#*/}
     build:
         runs-on: ubuntu-latest
         if: github.event_name == 'repository_dispatch'
