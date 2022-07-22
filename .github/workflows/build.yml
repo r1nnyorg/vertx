@@ -1,8 +1,4 @@
-on:
-    push:
-    repository_dispatch:
-    schedule:
-    - cron: '0 1 * * *'
+on: push
     
 jobs:
     backup:
@@ -14,7 +10,7 @@ jobs:
               git fetch --unshallow
               echo '${{secrets.KEY}}' > key
               chmod 400 key
-              git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' push -f git@bitbucket.org:chaowenguo/${GITHUB_REPOSITORY#*/}
+              git -c core.sshCommand=ssh\ -i\ key\ -o\ StrictHostKeyChecking=no push -f git@bitbucket.org:chaowenguo/${GITHUB_REPOSITORY#*/}
     build:
         runs-on: ubuntu-latest
         if: github.event_name == 'repository_dispatch'
@@ -53,7 +49,8 @@ jobs:
               sudo docker run -d --name ingress --net backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
     clean:
         runs-on: ubuntu-latest
-        if: github.event.schedule == '0 1 * * *'
+        permission:
+            actions: write
         steps:
         - uses: actions/setup-python@main
           with:
